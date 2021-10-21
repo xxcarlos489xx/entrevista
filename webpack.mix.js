@@ -1,15 +1,13 @@
-const mix = require('laravel-mix');
+// const mix = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
+// mix.options({
+//     hmrOptions: {
+//         host: 'localhost',
+//         port: '8002'
+//     }
+// })
+const {MIX_PACKAGE, NPM, VENDOR, OUTPUT, output} = require('laravel-multimix');
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+let folder = MIX_PACKAGE
+const modulesPath = `${__dirname}/modulos/`;
+require(`${modulesPath}/${folder}/webpack.mix.js`);

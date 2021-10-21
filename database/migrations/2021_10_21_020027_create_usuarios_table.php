@@ -19,7 +19,7 @@ class CreateUsuariosTable extends Migration
             $table->string('nombres');
             $table->foreignId('role_id')->references('id')->on('roles');
             $table->integer('estado')->comment('1 = activado ; 0 = desactivado');
-            $table->string('email')->unique();
+            $table->string('email',100)->unique();
             $table->rememberToken();
             $table->string('password');
             $table->timestamp('created_at')->useCurrent();
