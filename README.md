@@ -13,8 +13,7 @@
 
 ## Ruta Api
 
-- Apikey valido
-- AbCd123
+- Apikey valido: AbCd123
 
 - Ruta api:
 
