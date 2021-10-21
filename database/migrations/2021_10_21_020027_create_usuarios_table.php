@@ -17,10 +17,7 @@ class CreateUsuariosTable extends Migration
         Schema::create('usuarios', function (Blueprint $table) {
             $table->uuid('id')->primary('id');
             $table->string('nombres');
-            $table->string('ape_paterno');
-            $table->string('ape_materno');
-            $table->string('nombres_completos');
-            $table->foreignUuid('role_id')->references('id')->on('roles');
+            $table->foreignId('role_id')->references('id')->on('roles');
             $table->integer('estado')->comment('1 = activado ; 0 = desactivado');
             $table->string('email')->unique();
             $table->rememberToken();

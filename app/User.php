@@ -2,21 +2,33 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use App\Traits\Uuids;
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,Uuids;
 
+    protected $primaryKey = 'id';
+
+    public $incrementing = false;
+    
+    protected $table = 'usuarios';
+    // public $incrementing = false;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'nombres', 
+        'ape_paterno',
+        'ape_materno',
+        'nombres_completos',
+        'role_id',
+        'estado',
+        'email',
+        'password',
     ];
 
     /**
@@ -27,13 +39,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    
+    public function rol(){
+        return $this->hasOne(Roles::class,'role_id','id');
+    }
 }
