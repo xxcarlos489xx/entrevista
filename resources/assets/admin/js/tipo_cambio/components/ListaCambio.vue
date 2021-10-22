@@ -2,7 +2,9 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-lg-12 mb-5">
-                <a href="/admin/tipo-cambio/crear" class="btn btn-primary float-right" type="button">Crear registro</a>
+                <a  href="/admin/tipo-cambio/crear" 
+                    v-if="rol=='Admin'"
+                    class="btn btn-primary float-right" type="button">Crear registro</a>
             </div>
             <div class="col-lg-12 p-0">
                 <div class="card">
@@ -18,8 +20,8 @@
                                 <th>ESTADO</th>
                                 <th>FECHA REGISTRO</th>
                                 <th>FECHA EDICION</th>
-                                <th v-if="rol=='Administrator'">FECHA ELIMINADO</th>
-                                <th v-if="rol=='Administrator'">ACCIONES</th>
+                                <th v-if="rol=='Admin'">FECHA ELIMINADO</th>
+                                <th v-if="rol=='Admin'">ACCIONES</th>
 
                             </tr>
                         </thead>
@@ -36,8 +38,8 @@
                                 </td>
                                 <td>{{li.created_at | dateFormat()}}</td>
                                 <td>{{li.updated_at | dateFormat()}}</td>
-                                <td v-if="rol=='Administrator'">{{li.deleted_at | dateFormat()}}</td>
-                                <td v-if="rol=='Administrator'">
+                                <td v-if="rol=='Admin'">{{li.deleted_at | dateFormat()}}</td>
+                                <td v-if="rol=='Admin'">
                                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-cogs"></i>
                                     </button>
@@ -51,7 +53,7 @@
                                         </a>
                                         <a class="dropdown-item"    href="javascript:void(0);" 
                                                                     @click.prevent="eliminarForce(li.id)" 
-                                                                    v-if="li.deleted_at && rol=='Administrator'">Eliminar permanentemente
+                                                                    v-if="li.deleted_at && rol=='Admin'">Eliminar permanentemente
                                         </a>
                                         <a class="dropdown-item"    href="javascript:void(0);" 
                                                                     @click.prevent="changeEstado(li.id)" 
@@ -109,7 +111,6 @@ export default {
                 this.$TcApi
                     .get(page)
                     .then((rs)=>{
-                        console.log(rs);
                         this.loading = false
                         this.lista = rs.data;
                     })
@@ -130,7 +131,6 @@ export default {
                         this.$TcApi
                             .eliminar(id)
                             .then(({data})=>{
-                                console.log(data);
                                 if (data.delete) {
                                     const TC = this.lista.data.find(n=>n.id==id)
                                     Vue.set(TC,"deleted_at",data.fecha);

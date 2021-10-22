@@ -14,7 +14,7 @@
                             <div class="col-12 col-lg-3 col-md-6 col-sm-6 d-flex flex-column align-items-center box-module">
                                 <a href="{{ route('TipoCambio') }}"><i class="fas fa-hand-holding-usd my-3"></i></a>
                                 <small>
-                                    {{$rol == 'Administrator' ? 'Administrar' : 'Listar'}} tipos <br>de cambios
+                                    {{$rol == 'Admin' ? 'Administrar' : 'Listar'}} tipos <br>de cambios
                                 </small>
                             </div>
                         </div>

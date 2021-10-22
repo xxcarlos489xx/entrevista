@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     //ADMIN
     Route::get('/tipo-cambio', 'TipoCambio\TipoCambioController@index')->name('TipoCambio');
-    Route::get('/tipo-cambio/crear', 'TipoCambio\TipoCambioController@add');
-    Route::get('/tipo-cambio/edit/{id}', 'TipoCambio\TipoCambioController@edit');
+    Route::get('/tipo-cambio/crear', 'TipoCambio\TipoCambioController@add')->middleware('role:Admin');
+    Route::get('/tipo-cambio/edit/{id}', 'TipoCambio\TipoCambioController@edit')->middleware('role:Admin');
 
     //API FRONT
     Route::get('/api/tipo-cambio/all', 'TipoCambio\TipoCambioController@getRegistros');

@@ -19,9 +19,14 @@ class TipoCambioController extends Controller
     }
     public function edit($id){
         $tc = TC::find($id);
-        return view('admin.gestionCambio.edit',[
-            'tc' => json_encode($tc),
-        ]);
+        if ($tc) {
+            return view('admin.gestionCambio.edit',[
+                'tc' => json_encode($tc),
+            ]);
+        }else{
+            return redirect('admin/tipo-cambio');
+        }
+       
     }
     public function add(){
         
@@ -31,10 +36,10 @@ class TipoCambioController extends Controller
     public function getRegistros(){
         $rol = Auth::user()->rol->tipo;
         
-        if ($rol === 'Administrator') {
-            $registros = TC::withTrashed()->paginate(5);
+        if ($rol === 'Admin') {
+            $registros = TC::withTrashed()->orderBy('created_at','DESC')->paginate(5);
         }else{
-            $registros = TC::paginate(5);
+            $registros = TC::orderBy('created_at','DESC')->paginate(5);
         }
         return response()->json($registros);
     }
@@ -82,7 +87,7 @@ class TipoCambioController extends Controller
             return response()->json([   "delete" => false,
                                         "message"=>"Primero debe desactivar el registro!"]);
         }
-        if ($rol != 'Administrator') {
+        if ($rol != 'Admin') {
             return response()->json([   "delete" => false,
                                         "message"=>"No esta autorizado para realizar esta accion"]);
         }
@@ -98,7 +103,7 @@ class TipoCambioController extends Controller
         $rol = Auth::user()->rol->tipo;;
         $tc = TC::withTrashed()->find($id);
 
-        if ($rol != 'Administrator') {
+        if ($rol != 'Admin') {
             return response()->json([   "delete" => false,
                                         "message"=>"No esta autorizado para realizar esta accion"]);
         }
