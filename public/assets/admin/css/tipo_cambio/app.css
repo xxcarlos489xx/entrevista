@@ -1,0 +1,8 @@
+.tc-delete {
+  text-decoration: line-through;
+  -webkit-text-decoration-color: red;
+          text-decoration-color: red;
+  -webkit-text-decoration-style: double;
+          text-decoration-style: double;
+}
+

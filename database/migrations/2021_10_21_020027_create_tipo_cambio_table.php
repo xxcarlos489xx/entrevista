@@ -16,8 +16,8 @@ class CreateTipoCambioTable extends Migration
     {
         Schema::create('tipo_cambio', function (Blueprint $table) {
             $table->uuid('id')->primary('id');
-            $table->decimal('valor_compra',3,2);
-            $table->decimal('valor_venta',3,2);
+            $table->decimal('valor_compra',4,3);
+            $table->decimal('valor_venta',4,3);
             $table->string('pais',5);
             $table->string('tipo_moneda',5);
             $table->tinyInteger('activo')->comment('1 = activado ; 0 = desactivado');

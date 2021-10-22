@@ -11,4 +11,20 @@ html{
     background-color: #767373;
     border-top: solid 2px #3490dc;
     color: #fff;
-}    
+}
+.box-module{
+    box-shadow: 5px 5px 10px black;
+    border: solid 1px whitesmoke;
+    border-radius: 5px;
+    & i{
+        font-size: 90px;
+    }
+    & small{
+        font-size: 15px;
+        font-weight: 400;
+        text-align: center;
+    }
+}
+.welcome{
+    place-content: center;
+}
